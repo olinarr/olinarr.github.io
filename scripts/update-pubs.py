@@ -154,7 +154,7 @@ for year, year_entries in years.items():
 
 result += "<!-- END PUBLICATIONS -->"
 
-with open("index.html", "r") as file:
+with open("index_template.html", "r") as file:
 	data = file.read()
 
 data = data.replace("{{publications}}", result)
