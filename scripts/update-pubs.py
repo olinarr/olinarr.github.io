@@ -1,6 +1,6 @@
 import re
 
-with open("cv-source/publications.bib", "r") as file:
+with open("../cv-source/publications.bib", "r") as file:
 	data = file.read()
 
 curr = ""
@@ -154,10 +154,10 @@ for year, year_entries in years.items():
 
 result += "<!-- END PUBLICATIONS -->"
 
-with open("templates/index.html", "r") as file:
+with open("index.html", "r") as file:
 	data = file.read()
 
 data = data.replace("{{publications}}", result)
 
-with open("index.html", "w") as file:
+with open("../index.html", "w") as file:
 	file.write(data)

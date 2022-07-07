@@ -1,10 +1,10 @@
-cd cv-source
+cd ../cv-source
 
 pdflatex OlivieroNardi.tex
 bibtex OlivieroNardi.aux
 pdflatex OlivieroNardi.tex
 pdflatex OlivieroNardi.tex
 mv OlivieroNardi.pdf ../files/OlivieroNardiCV.pdf
-cd ..
+cd ../scripts
 
 python3 update-pubs.py
