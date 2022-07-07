@@ -18,8 +18,9 @@
 %\photo[64pt]{picture}: optional; 64pt is the height the picture, you can set here the size you prefer; picture is the name of the picture file
 %\quote{Some quote}: optional
 
-\definecolor{myblue}{RGB}{26, 92, 166}
-\newcommand{\blue}[1]{\textcolor{myblue}{#1}}
+\definecolor{specialcolor}{RGB}{108, 113, 196}
+\newcommand{\mycolor}[1]{\textcolor{specialcolor}{#1}}
+\colorlet{color1}{specialcolor}
 
 % https://tex.stackexchange.com/questions/310612/moderncv-date-year-on-top-month
 \usepackage{datetime}
@@ -36,33 +37,33 @@
 
     \cventry{\yearabove{April}{2022}--Present}{Ph.D. candidate (MSCA)}{TU Wien}{Austria}{}{
         \vspace{0.01cm}
-        \blue{Supervisor}: Stefan Woltran\newline{}
-        \blue{Programme}: LogiCS@TUWien\newline{}
-        \blue{Area}: Logical methods in Computer Science\newline{}
-        \blue{Funding}: Co-funded by the European Union as part of the Marie Skłodowska-Curie Actions (MSCA).\\[0.05cm]
+        \mycolor{Supervisor}: Stefan Woltran\newline{}
+        \mycolor{Programme}: LogiCS@TUWien\newline{}
+        \mycolor{Area}: Logical methods in Computer Science\newline{}
+        \mycolor{Funding}: Co-funded by the European Union as part of the Marie Skłodowska-Curie Actions (MSCA).\\[0.05cm]
     }
 
     \cventry{\yearabove{September}{2019}--\yearabove{July}{2021}}{Master's Degree in Artificial Intelligence}{University of Amsterdam}{The Netherlands}{}{
         \vspace{0.01cm}
-        \blue{Thesis title}: A Graph-Based Algorithm for the Automated \mbox{Justification} of Collective Decisions\newline{}
-        \blue{Supervisors}: Arthur Boixel and Ulle Endriss\newline{}
-        \blue{Final evaluation}: Graduated \emph{Cum Laude}\newline{}
-        \blue{GPA}: 9.3/10\\[0.1cm]
-        \blue{Selected coursework}: Knowledge Representation and Reasoning, Computational Social Choice, Game Theory, Machine Learning, Reinforcement Learning, Evolutionary Computing\\[0.05cm]
+        \mycolor{Thesis title}: A Graph-Based Algorithm for the Automated \mbox{Justification} of Collective Decisions\newline{}
+        \mycolor{Supervisors}: Arthur Boixel and Ulle Endriss\newline{}
+        \mycolor{Final evaluation}: Graduated \emph{Cum Laude}\newline{}
+        \mycolor{GPA}: 9.3/10\\[0.1cm]
+        \mycolor{Selected coursework}: Knowledge Representation and Reasoning, Computational Social Choice, Game Theory, Machine Learning, Reinforcement Learning, Evolutionary Computing\\[0.05cm]
     }
 
     \cventry{\yearabove{September}{2016}--\yearabove{July}{2019}}{Bachelor's Degree in Computer Science}{University of Verona}{Italy}{}{
         \vspace{0.01cm}
-        \blue{Thesis title}: Control of a Robotic Arm through Reinforcement \mbox{Learning}\newline{}
-        \blue{Supervisor}: Alessandro Farinelli\newline{}
-        \blue{Final evaluation}: 110/110 \emph{Cum Laude}\newline{}
-        \blue{GPA}: 29.9/30\\[0.1cm]
-        \blue{Selected coursework}: Foundations of Computing, Algorithms and Data Structures, Logic, Compilers, Databases, Programming Languages, Linear Algebra, Calculus\\[0.05cm]
+        \mycolor{Thesis title}: Control of a Robotic Arm through Reinforcement \mbox{Learning}\newline{}
+        \mycolor{Supervisor}: Alessandro Farinelli\newline{}
+        \mycolor{Final evaluation}: 110/110 \emph{Cum Laude}\newline{}
+        \mycolor{GPA}: 29.9/30\\[0.1cm]
+        \mycolor{Selected coursework}: Foundations of Computing, Algorithms and Data Structures, Logic, Compilers, Databases, Programming Languages, Linear Algebra, Calculus\\[0.05cm]
     }
 
     \cventry{\yearabove{September}{2011}--\yearabove{July}{2016}}{High School Diploma in Scientific and \mbox{Technological} Studies}{``L. Da Vinci'' High School}{Italy}{}{
                 \vspace{0.01cm}
-                \blue{Final evaluation}: 97/100\newline{}
+                \mycolor{Final evaluation}: 97/100\newline{}
     }
 
     \newpage
@@ -70,15 +71,15 @@
     \section{Work experience}
 
     \cventry{\yearabove{September}{2021}--\yearabove{February}{2022}}{Research Assistant at the Computational Social Choice Group}{Institute for Logic, Language and \mbox{Computation} (ILLC)}{University of Amsterdam, The Netherlands}{}{
-        \blue{Duties}: Writing scientific papers, developing software for research purposes\\[0.05cm]
+        \mycolor{Duties}: Writing scientific papers, developing software for research purposes\\[0.05cm]
     }
 
     %\cventry{\yearabove{February}{2021}--\yearabove{February}{2021}}{Teaching Assistant in Game Theory}{University of Amsterdam}{The Netherlands}{}{
-    %    \blue{Duties}: Grading homework\\[0.05cm]
+    %    \mycolor{Duties}: Grading homework\\[0.05cm]
     %}
 
     \cventry{\yearabove{October}{2020}--\yearabove{January}{2021}}{Teaching Assistant in Natural Language \mbox{Processing}}{University of Amsterdam}{The Netherlands}{}{
-        \blue{Duties}: Giving tutorials, assisting students, grading homework
+        \mycolor{Duties}: Giving tutorials, assisting students, grading homework
     }
 
     \closesection{}
