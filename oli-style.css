@@ -87,9 +87,13 @@ hr {
 
 #copyright-info {
     float: left;
-    margin-bottom: 10px;
+    margin-bottom: 7%;
 }
 
 #linktotop-parent {
     float: right;
+}
+
+h1 {
+    font-size: 38px;
 }
