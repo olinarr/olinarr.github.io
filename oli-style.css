@@ -45,8 +45,10 @@ p {
     text-justify: inter-word;
 }
 
+.bluelink {color: #6c71c4; text-decoration: none; border-bottom: none;}
+.bluelink:hover {border-bottom: 1px solid #6c71c4}
+
 #nav {margin-top: 0px; line-height: 1;}
-#nav a {border-bottom: none; color: #6c71c4; text-decoration: none}
 #nav a:hover {border-bottom: 1px solid #6c71c4}
 #nav {font-size: 75%}
 #nav ul li { display: inline;}
@@ -57,9 +59,6 @@ p {
 #bio {margin-top: 5%;}
 
 footer {font-size: 75%}
-
-#linktotop {color: #6c71c4; text-decoration: none; border-bottom: none;}
-#linktotop:hover {border-bottom: 1px solid #6c71c4}
 
 @media screen and (max-width: 600px) {
     body {
