@@ -137,14 +137,14 @@ for year, year_entries in years.items():
 				result += ", " + entry.publisher
 			result += f", {entry.month} {entry.year}. " + ("" if entry.note is None else f"{entry.note}. ")
 			if entry.note != "To appear":
-				result += "[<a target=\"_blank\" href=\"./files/" + entry.file_name + ".pdf\">pdf</a>]"
+				result += "[<a target=\"_blank\" href=\"./files/publications/" + entry.file_name + ".pdf\">pdf</a>]"
 
 		elif entry.the_type == "mastersthesis":
 			result += entry.authors + ". <strong>" + entry.title + "</strong>. "
 			result += "Master's Thesis, " + entry.school
 			result += f", {entry.month} {entry.year}. " + ("" if entry.note is None else f"{entry.note}. ")
 			if entry.note != "To appear":
-				result += "[<a target=\"_blank\" href=\"./files/" + entry.file_name + ".pdf\">pdf</a>]"
+				result += "[<a target=\"_blank\" href=\"./files/publications/" + entry.file_name + ".pdf\">pdf</a>]"
 
 		else:
 			raise NotImplementedError
