@@ -24,6 +24,15 @@ def month_gt(m1, m2):
 	row = ["january", "february", "march", "april", "may", "june", "july", "september", "october", "november", "december"]
 	return row.index(m1.lower()) < row.index(m2.lower())
 
+eprints = {}
+with open("../files/publications/eprints.txt", "r") as file:
+	data = file.read()
+	if data:
+		for row in data.split("\n"):
+			name, link = row.split(" ")
+			assert name not in eprints
+			eprints[name] = link
+
 class Entry:
 	def __init__(self, entry):
 
@@ -101,13 +110,10 @@ class Entry:
 
 		self.title = title_good
 
-		archivePrefix = re.match(r".*archivePrefix[^\{]*\{([^\}]*)\}", entry)
-		eprint = re.match(r".*eprint[^\{]*\{([^\}]*)\}", entry)
-		if eprint is not None:
-			assert archivePrefix is not None and archivePrefix.group(1) in ["arXiv"], "eprint type \"" + archivePrefix.group(1) + "\" not known!"
-			archivePrefix = archivePrefix.group(1)
-			if archivePrefix == "arXiv":
-				self.eprint = "https://arxiv.org/abs/" + eprint.group(1)
+		if self.file_name in eprints:
+			self.eprint = eprints[self.file_name]
+
+		
 
 	def __gt__(self, other):
 		if self.year > other.year:
