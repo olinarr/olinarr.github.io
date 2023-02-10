@@ -174,7 +174,7 @@ for year, year_entries in years.items():
 
 		resources.append("<a target=\"_blank\" href=\"./files/publications/bib/" + entry.file_name + ".bib\">bib</a>")
 
-		result += ("&nbsp;&nbsp;[" + " ".join(resources) + "]") if resources else ""
+		result += ("&nbsp;&nbsp;[" + ", ".join(resources) + "]") if resources else ""
 
 		result += "\n"
 
