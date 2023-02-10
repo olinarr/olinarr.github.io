@@ -41,6 +41,8 @@ class Entry:
 		self.title = None
 		self.booktitle = None
 
+		self.bib = entry
+
 		entry = entry.replace("\n", " ")
 		self.the_type = re.match(r"@([^\{]*)\{", entry).group(1)
 		self.file_name = re.match(r"@[^\{]*\{([^,]*),", entry).group(1)
@@ -115,6 +117,11 @@ class Entry:
 			return self.title > other.title
 
 entries = list(map(Entry, entries))
+# we assume it's empty -- make.bash
+for entry in entries:
+	with open("../files/publications/bib/" + entry.file_name + ".bib" , "w") as file:
+		file.write(entry.bib)
+	
 
 years = {}
 for entry in entries:
@@ -128,26 +135,28 @@ result = "<!-- Automatically generated from my personal .bib file -->\n<h2 id=\"
 for year, year_entries in years.items():
 	result += f"<h3>{year}</h3>\n\t<ul>\n"
 	for entry in sorted(year_entries):
+
+		assert entry.the_type in ("inproceedings", "mastersthesis")
+
 		result += "\t\t<li> "
 
+		result += entry.authors + ". <strong>" + entry.title + "</strong>. "
+
 		if entry.the_type == "inproceedings":
-			result += entry.authors + ". <strong>" + entry.title + "</strong>. "
 			result += "In <em>" + entry.booktitle + "</em> " + entry.conference
 			if entry.publisher is not None:
 				result += ", " + entry.publisher
-			result += f", {entry.month} {entry.year}. " + ("" if entry.note is None else f"{entry.note}. ")
-			if entry.note != "To appear":
-				result += "[<a target=\"_blank\" href=\"./files/publications/" + entry.file_name + ".pdf\">pdf</a>]"
-
 		elif entry.the_type == "mastersthesis":
-			result += entry.authors + ". <strong>" + entry.title + "</strong>. "
 			result += "Master's Thesis, " + entry.school
-			result += f", {entry.month} {entry.year}. " + ("" if entry.note is None else f"{entry.note}. ")
-			if entry.note != "To appear":
-				result += "[<a target=\"_blank\" href=\"./files/publications/" + entry.file_name + ".pdf\">pdf</a>]"
 
-		else:
-			raise NotImplementedError
+		result += f", {entry.month} {entry.year}. " + ("" if entry.note is None else f"{entry.note}.")
+
+		resources = []
+		if entry.note != "To appear":
+			resources.append("<a target=\"_blank\" href=\"./files/publications/pdf/" + entry.file_name + ".pdf\">pdf</a>")
+		resources.append("<a target=\"_blank\" href=\"./files/publications/bib/" + entry.file_name + ".bib\">bib</a>")
+
+		result += ("&nbsp;&nbsp;[" + " ".join(resources) + "]") if resources else ""
 
 		result += "\n"
 
