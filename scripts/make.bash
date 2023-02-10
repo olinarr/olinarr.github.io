@@ -8,6 +8,7 @@ mv OlivieroNardi.pdf ../files/OlivieroNardiCV.pdf
 
 cd ..
 
+touch ./files/publications/bib/deletemeplease.tmp
 rm ./files/publications/bib/*
 
 cd ./scripts

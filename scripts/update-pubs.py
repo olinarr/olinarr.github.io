@@ -40,6 +40,7 @@ class Entry:
 		self.year = None
 		self.title = None
 		self.booktitle = None
+		self.eprint = None
 
 		self.bib = entry
 
@@ -100,6 +101,14 @@ class Entry:
 
 		self.title = title_good
 
+		archivePrefix = re.match(r".*archivePrefix[^\{]*\{([^\}]*)\}", entry)
+		eprint = re.match(r".*eprint[^\{]*\{([^\}]*)\}", entry)
+		if eprint is not None:
+			assert archivePrefix is not None and archivePrefix.group(1) in ["arXiv"], "eprint type \"" + archivePrefix.group(1) + "\" not known!"
+			archivePrefix = archivePrefix.group(1)
+			if archivePrefix == "arXiv":
+				self.eprint = "https://arxiv.org/abs/" + eprint.group(1)
+
 	def __gt__(self, other):
 		if self.year > other.year:
 			return True
@@ -154,6 +163,9 @@ for year, year_entries in years.items():
 		resources = []
 		if entry.note != "To appear":
 			resources.append("<a target=\"_blank\" href=\"./files/publications/pdf/" + entry.file_name + ".pdf\">pdf</a>")
+		if entry.eprint is not None:
+			resources.append("<a target=\"_blank\" href=\"" + entry.eprint + "\">eprint</a>")
+
 		resources.append("<a target=\"_blank\" href=\"./files/publications/bib/" + entry.file_name + ".bib\">bib</a>")
 
 		result += ("&nbsp;&nbsp;[" + " ".join(resources) + "]") if resources else ""
