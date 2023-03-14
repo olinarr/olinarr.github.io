@@ -1,10 +1,11 @@
 body {
     margin: 5% auto;
-    background: #F1DABB;
-    color: #333;
+    background: #f2f2f2;
+    color: #444444;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     font-size: 16px;
     line-height: 1.8;
+    text-shadow: 0 1px 0 #ffffff;
     margin-bottom: 4%;
     margin-left: 19.5%;
     margin-right: 19.5%;
@@ -15,8 +16,8 @@ code {
 }
 
 a {
-    border-bottom: 1px solid #393A63;
-    color: #393A63;
+    border-bottom: 1px solid #444444;
+    color: #444444;
     text-decoration: none;
 }
 
@@ -36,7 +37,7 @@ h1 {
 }
 
 h2 {
-    color: #393A63;
+    color: #6c71c4;
 }
 
 p {
@@ -44,11 +45,11 @@ p {
     text-justify: inter-word;
 }
 
-.bluelink {color: #393A63; text-decoration: none; border-bottom: none;}
-.bluelink:hover {border-bottom: 1px solid #393A63}
+.bluelink {color: #6c71c4; text-decoration: none; border-bottom: none;}
+.bluelink:hover {border-bottom: 1px solid #6c71c4}
 
 #nav {margin-top: 0px; line-height: 1;}
-#nav a:hover {border-bottom: 1px solid #393A63}
+#nav a:hover {border-bottom: 1px solid #6c71c4}
 #nav {font-size: 75%}
 #nav ul li { display: inline;}
 #nav {overflow: hidden; margin: 0; }
@@ -75,6 +76,7 @@ footer {font-size: 75%}
     width: 40vw;
     height: auto;
     margin-top: 10px;
+    border: 1px solid #444444;
 }
 
 hr {
