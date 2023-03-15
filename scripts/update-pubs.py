@@ -145,7 +145,7 @@ for entry in entries:
 	else:
 		years[entry.year] = {entry}
 
-result = "<!-- Automatically generated from my personal .bib file -->\n<h2 id=\"publications\">Publications</h2>\n"
+result = "<!-- Automatically generated from my personal .bib file -->\n<h2 id=\"publications\">Publications</h2>\n\n(you may also check my <a href=\"https://dblp.uni-trier.de/pid/319/9565.html\">dblp page</a>.)\n\n"
 
 for year, year_entries in years.items():
 	result += f"<h3>{year}</h3>\n\t<ul>\n"
