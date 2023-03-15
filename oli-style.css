@@ -70,7 +70,7 @@ footer {font-size: 75%}
 #oliviero-picture {
     float:right;
     margin-left: 5%;
-    margin-bottom: inherit;
+    margin-bottom: 1em;
     margin-right: 0px;
     max-width: 270px;
     width: 40vw;
