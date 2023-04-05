@@ -1,0 +1,13 @@
+1) To add a new publication, add it inside cv-source/publications.bib
+    - If it still to appear, insert "To appear." in the notes. (Remember to remove it after!).
+    - If it is a preprint, then ONLY add it inside files/publications/preprints.bib
+        * When the preprint is published, you should remove it from this file there, as well as from the eprints.txt, dois.txt and links.txt files.
+    - Only a certain set of bib-items are supported (misc, inproceedings...). If you need a new one, update the update-citations.py file.
+2) Suppose the bib-key for this publication is NAME.
+    - To add a pdf file, insert NAME.pdf inside files/publications/pdf/
+    - To add a poster, insert NAME.pdf inside files/publications/posters/
+3) The bib file inside files/publications/bib is automatically generated.
+4) To add a preprint link, insert inside the file files/publications/eprints.txt a line like "NAME <link> <preprint-type>" (preprint-type is e.g. arXiv, this will be rendered in the website).
+5) To add a DOI link, insert inside the file files/publications/dois.txt a line like "NAME <doi>".
+6) To add a link (e.g. to a demo), insert inside the file files/publications/links.txt a line like "NAME <link>".
+7) Run "bash make.bash" inside the scripts folder.
