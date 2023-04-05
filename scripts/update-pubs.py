@@ -1,24 +1,31 @@
 import re
+import os
 
+data = {}
 with open("../cv-source/publications.bib", "r") as file:
-	data = file.read()
+	data["pubs"] = file.read()
 
-curr = ""
-mode = "eating"
-entries = []
-for char in data:
-	if mode == "eating":
-		if char in {"}", "\n"} and curr[-1] == "}":
-			curr += "\n}"
-			entries.append(curr)
-			curr = ""
-			mode = "waiting"
+with open("../files/publications/preprints.bib", "r") as file:
+	data["preprints"] = file.read()
+
+
+entries = {"pubs": [], "preprints": []}
+for key in ("pubs", "preprints"):
+	curr = ""
+	mode = "eating"
+	for char in data[key]:
+		if mode == "eating":
+			if char in {"}", "\n"} and curr[-1] == "}":
+				curr += "\n}"
+				entries[key].append(curr)
+				curr = ""
+				mode = "waiting"
+			else:
+				curr += char
 		else:
-			curr += char
-	else:
-		if char == "@":
-			curr = "@"
-			mode = "eating"
+			if char == "@":
+				curr = "@"
+				mode = "eating"
 
 def month_gt(m1, m2):
 	row = ["january", "february", "march", "april", "may", "june", "july", "september", "october", "november", "december"]
@@ -29,9 +36,27 @@ with open("../files/publications/eprints.txt", "r") as file:
 	data = file.read()
 	if data:
 		for row in data.split("\n"):
-			name, link = row.split(" ")
+			name, link, eprintType = row.split(" ")
 			assert name not in eprints
-			eprints[name] = link
+			eprints[name] = (link, eprintType)
+
+dois = {}
+with open("../files/publications/dois.txt", "r") as file:
+	data = file.read()
+	if data:
+		for row in data.split("\n"):
+			name, doi = row.split(" ")
+			assert name not in dois
+			dois[name] = doi
+
+links = {}
+with open("../files/publications/links.txt", "r") as file:
+	data = file.read()
+	if data:
+		for row in data.split("\n"):
+			name, link = row.split(" ")
+			assert name not in links
+			links[name] = link
 
 class Entry:
 	def __init__(self, entry):
@@ -50,6 +75,8 @@ class Entry:
 		self.title = None
 		self.booktitle = None
 		self.eprint = None
+		self.doi = None
+		self.link = None
 
 		self.bib = entry
 
@@ -111,9 +138,17 @@ class Entry:
 		self.title = title_good
 
 		if self.file_name in eprints:
-			self.eprint = eprints[self.file_name]
+			self.eprint, self.eprintType = eprints[self.file_name]
 
-		
+		if self.file_name in dois:
+			self.doi = dois[self.file_name]
+
+		if self.file_name in links:
+			self.link = links[self.file_name]
+
+		self.pdf = os.path.isfile("../files/publications/pdf/" + self.file_name + ".pdf")
+
+		self.poster = os.path.isfile("../files/publications/posters/" + self.file_name + ".pdf")
 
 	def __gt__(self, other):
 		if self.year > other.year:
@@ -131,19 +166,24 @@ class Entry:
 		else:
 			return self.title > other.title
 
-entries = list(map(Entry, entries))
-# we assume it's empty -- make.bash
-for entry in entries:
-	with open("../files/publications/bib/" + entry.file_name + ".bib" , "w") as file:
-		file.write(entry.bib)
+for key in ("pubs", "preprints"):
+	entries[key] = list(map(Entry, entries[key]))
+	# we assume it's empty -- make.bash
+	for entry in entries[key]:
+		with open("../files/publications/bib/" + entry.file_name + ".bib" , "w") as file:
+			file.write(entry.bib)
 	
+years = {"preprints": set()}
 
-years = {}
-for entry in entries:
+for entry in entries["preprints"]:
+	years["preprints"].add(entry)
+
+for entry in entries["pubs"]:
 	if entry.year in years:
 		years[entry.year].add(entry)
 	else:
 		years[entry.year] = {entry}
+
 
 result = "<!-- Automatically generated from my personal .bib file -->\n<h2 id=\"publications\">Publications</h2>\n\n(you may also check my <a href=\"https://dblp.uni-trier.de/pid/319/9565.html\">dblp page</a>.)\n\n"
 
@@ -151,7 +191,7 @@ for year, year_entries in years.items():
 	result += f"<h3>{year}</h3>\n\t<ul>\n"
 	for entry in sorted(year_entries):
 
-		assert entry.the_type in ("inproceedings", "mastersthesis")
+		assert entry.the_type in ("inproceedings", "mastersthesis", "misc")
 
 		result += "\t\t<li> "
 
@@ -161,16 +201,26 @@ for year, year_entries in years.items():
 			result += "In <em>" + entry.booktitle + "</em> " + entry.conference
 			if entry.publisher is not None:
 				result += ", " + entry.publisher
+			result += ", " + f"{entry.month} {entry.year}. "
 		elif entry.the_type == "mastersthesis":
-			result += "Master's Thesis, " + entry.school
+			result += "Master's Thesis, " + entry.school + ", " + f"{entry.month} {entry.year}. "
+		elif entry.the_type == "misc":
+			pass
 
-		result += f", {entry.month} {entry.year}. " + ("" if entry.note is None else f"{entry.note}.")
+		if entry.note:
+			result += f"{entry.note}."
 
 		resources = []
-		if entry.note != "To appear":
+		if entry.pdf:
 			resources.append("<a target=\"_blank\" href=\"./files/publications/pdf/" + entry.file_name + ".pdf\">pdf</a>")
 		if entry.eprint is not None:
-			resources.append("<a target=\"_blank\" href=\"" + entry.eprint + "\">eprint</a>")
+			resources.append("<a target=\"_blank\" href=\"" + entry.eprint + "\">" + entry.eprintType + "</a>")
+		if entry.poster:
+			resources.append("<a target=\"_blank\" href=\"./files/publications/posters/" + entry.file_name + ".pdf\">poster</a>")
+		if entry.link is not None:
+			resources.append("<a target=\"_blank\" href=\"" + entry.link + "\">link</a>")
+		if entry.doi is not None:
+			resources.append("<a target=\"_blank\" href=\"" + entry.doi + "\">doi</a>")
 
 		resources.append("<a target=\"_blank\" href=\"./files/publications/bib/" + entry.file_name + ".bib\">bib</a>")
 
