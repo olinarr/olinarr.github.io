@@ -59,7 +59,7 @@ with open("../files/publications/links.txt", "r") as file:
 			links[name] = link
 
 class Entry:
-	def __init__(self, entry):
+	def __init__(self, entry, isPreprint):
 
 
 		self.the_type = None
@@ -75,8 +75,10 @@ class Entry:
 		self.title = None
 		self.booktitle = None
 		self.eprint = None
+		self.eprintType = None
 		self.doi = None
 		self.link = None
+		self.isPreprint = isPreprint
 
 		self.bib = entry
 
@@ -140,7 +142,7 @@ class Entry:
 		if self.file_name in eprints:
 			self.eprint, self.eprintType = eprints[self.file_name]
 
-		if self.file_name in dois:
+		if self.file_name in dois and not self.isPreprint:
 			self.doi = dois[self.file_name]
 
 		if self.file_name in links:
@@ -167,7 +169,7 @@ class Entry:
 			return self.title > other.title
 
 for key in ("pubs", "preprints"):
-	entries[key] = list(map(Entry, entries[key]))
+	entries[key] = [Entry(entry = e, isPreprint = (key == "preprints")) for e in entries[key]]
 	# we assume it's empty -- make.bash
 	for entry in entries[key]:
 		with open("../files/publications/bib/" + entry.file_name + ".bib" , "w") as file:
@@ -188,6 +190,9 @@ for entry in entries["pubs"]:
 result = "<!-- Automatically generated from my personal .bib file -->\n<h2 id=\"publications\">Publications</h2>\n\n(you may also check my <a href=\"https://dblp.uni-trier.de/pid/319/9565.html\">dblp page</a>.)\n\n"
 
 for year, year_entries in years.items():
+	if not year_entries:
+		continue
+	
 	result += f"<h3>{year}</h3>\n\t<ul>\n"
 	for entry in sorted(year_entries):
 
@@ -205,7 +210,8 @@ for year, year_entries in years.items():
 		elif entry.the_type == "mastersthesis":
 			result += "Master's Thesis, " + entry.school + ", " + f"{entry.month} {entry.year}. "
 		elif entry.the_type == "misc":
-			pass
+			if not entry.isPreprint:
+				result += f"{entry.month} {entry.year}. "
 
 		if entry.note:
 			result += f"{entry.note}."
