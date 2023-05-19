@@ -8,6 +8,14 @@
 \usepackage[scale=0.8]{geometry}
 \recomputelengths
 
+\usepackage[resetlabels,labeled]{multibib}
+
+\newcites{Conf}{Conference publications}
+\newcites{Prep}{Preprints}
+
+\usepackage{kpfonts}
+\usepackage[T1]{fontenc}
+
 \firstname{Oliviero}
 \familyname{Nardi}
 \title{Curriculum Vit\ae}
@@ -176,15 +184,25 @@
 
     \closesection{}
 
-    \section{Conference Talks}
+    \section{Talks}
 
-    \cventry{July 2022}{IJCAI 2022}{Vienna}{Austria}{}{Title: ``Displaying Justifications for Collective Decisions'' (demo paper).}
+    \cventry{July 2023}{COMSOC-2023}{Beersheba}{Israel}{}{Title: ``Repeated Fair Allocation of Indivisible Items''.}
 
-    \cventry{May 2022}{AAMAS 2022}{Online}{}{}{Title: ``A Graph-Based Algorithm for the Automated Justification of Collective Decisions''.}
+    \cventry{June 2023}{AAMAS-2023}{London}{UK}{}{Title: ``Free-Riding in Multi-Issue Decisions''.}
 
-    \nocite{*}
-    \bibliographystyle{unsrt}
-    \bibliography{publications}
+    \cventry{July 2022}{IJCAI-2022}{Vienna}{Austria}{}{Title: ``Displaying Justifications for Collective Decisions'' (demo paper).}
+
+    \cventry{May 2022}{AAMAS-2022}{Online}{}{}{Title: ``A Graph-Based Algorithm for the Automated Justification of Collective Decisions''.}
+
+    \section{Publications}
+
+    \nociteConf{*}
+    \bibliographystyleConf{unsrt}
+    \bibliographyConf{conference}
+
+    \nocitePrep{*}
+    \bibliographystylePrep{unsrt}
+    \bibliographyPrep{preprints}
 
     \closesection{}
 

@@ -1,7 +1,8 @@
 cd ../cv-source
 
 pdflatex OlivieroNardi.tex
-bibtex OlivieroNardi.aux
+bibtex Conf.aux
+bibtex Prep.aux
 pdflatex OlivieroNardi.tex
 pdflatex OlivieroNardi.tex
 mv OlivieroNardi.pdf ../files/OlivieroNardiCV.pdf
