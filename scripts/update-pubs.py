@@ -40,6 +40,8 @@ with open("../files/publications/eprints.txt", "r") as file:
 	if data:
 		for row in data.split("\n"):
 			name, link, eprintType = row.split(" ")
+			if link == "local":
+				link = "./files/publications/full-versions/" + name + ".pdf"
 			assert name not in eprints
 			eprints[name] = (link, eprintType)
 
