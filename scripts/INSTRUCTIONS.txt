@@ -1,4 +1,4 @@
-1) To add a new publication, add it inside cv-source/publications.bib
+1) To add a new publication, add it inside cv-source/preprints.bib, cv-source/conference.bib or cv-source/journal.bib
     - If it still to appear, insert "To appear." in the notes. (Remember to remove it after!).
     - If it is a preprint, then ONLY add it inside files/publications/preprints.bib
         * When the preprint is published, you should remove it from this file there, as well as from the eprints.txt, dois.txt and links.txt files.
