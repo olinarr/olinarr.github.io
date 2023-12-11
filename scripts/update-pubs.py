@@ -8,6 +8,9 @@ with open("../cv-source/conference.bib", "r") as file:
 with open("../cv-source/journal.bib", "r") as file:
 	data["pubs"] += file.read()
 
+with open("../cv-source/thesis.bib", "r") as file:
+	data["pubs"] += file.read()
+
 with open("../cv-source/preprint.bib", "r") as file:
 	data["preprints"] = file.read()
 

@@ -11,6 +11,8 @@
 \usepackage[resetlabels,labeled]{multibib}
 
 \newcites{Conf}{Conference publications}
+\newcites{Jour}{Journal publications}
+\newcites{Thes}{Theses}
 \newcites{Prep}{Preprints}
 
 \usepackage{kpfonts}
@@ -180,7 +182,7 @@
 
     \section{Academic Activities}
 
-    \cvline{}{I have served as a subreviewer for the international journal \emph{Algorithmica} and the \emph{ECAI 2023} and \emph{AAMAS 2024} conferences.}
+    \cvline{}{I have served as a subreviewer for the international journal \emph{Algorithmica}, and the \emph{ECAI 2023} and \emph{AAMAS 2024} conferences.}
 
     \closesection{}
 
@@ -196,9 +198,17 @@
 
     \section{Publications}
 
+    \nociteJour{*}
+    \bibliographystyleJour{unsrt}
+    \bibliographyJour{journal}
+
     \nociteConf{*}
     \bibliographystyleConf{unsrt}
     \bibliographyConf{conference}
+
+    \nociteThes{*}
+    \bibliographystyleThes{unsrt}
+    \bibliographyThes{thesis}
 
     \nocitePrep{*}
     \bibliographystylePrep{unsrt}

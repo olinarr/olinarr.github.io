@@ -1,8 +1,30 @@
 cd ../cv-source
 
+# Clean
+rm Conf.*
+rm Jour.*
+rm Thes.*
+rm Prep.*
+
 pdflatex OlivieroNardi.tex
-bibtex Conf.aux
-bibtex Prep.aux
+
+# Only if nonempty
+if [ -s conference.bib ]; then
+    bibtex Conf.aux
+fi
+
+if [ -s journal.bib ]; then
+    bibtex Jour.aux
+fi
+
+if [ -s thesis.bib ]; then
+    bibtex Thes.aux
+fi
+
+if [ -s preprint.bib ]; then
+    bibtex Prep.aux
+fi
+
 pdflatex OlivieroNardi.tex
 pdflatex OlivieroNardi.tex
 mv OlivieroNardi.pdf ../files/OlivieroNardiCV.pdf
