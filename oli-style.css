@@ -81,6 +81,10 @@ footer {font-size: 75%}
     /* border: 1px solid #EBF2EB; */
 }
 
+#picture-credits-text {
+    display: none;
+}
+
 hr {
     color: #EBF2EB;
     margin-top: 4%;
