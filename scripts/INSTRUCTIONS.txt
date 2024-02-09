@@ -10,4 +10,5 @@
 4) To add a preprint link, insert inside the file files/publications/eprints.txt a line like "NAME <link> <preprint-type>" (preprint-type is e.g. arXiv, this will be rendered in the website).
 5) To add a DOI link, insert inside the file files/publications/dois.txt a line like "NAME <doi>".
 6) To add a link (e.g. to a demo), insert inside the file files/publications/links.txt a line like "NAME <link>".
+6) To add a code (e.g. Zenodo, Github), insert inside the file files/publications/codes.txt a line like "NAME <code>".
 7) Run "bash make.bash" inside the scripts folder.
