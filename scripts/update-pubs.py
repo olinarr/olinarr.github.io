@@ -66,6 +66,15 @@ with open("../files/publications/links.txt", "r") as file:
 			assert name not in links
 			links[name] = link
 
+codes = {}
+with open("../files/publications/codes.txt", "r") as file:
+	data = file.read()
+	if data:
+		for row in data.split("\n"):
+			name, code = row.split(" ")
+			assert name not in codes
+			codes[name] = code
+
 class Entry:
 	def __init__(self, entry, isPreprint):
 
@@ -86,6 +95,7 @@ class Entry:
 		self.eprintType = None
 		self.doi = None
 		self.link = None
+		self.code = None
 		self.isPreprint = isPreprint
 
 		self.bib = entry
@@ -155,6 +165,9 @@ class Entry:
 
 		if self.file_name in links:
 			self.link = links[self.file_name]
+
+		if self.file_name in codes:
+			self.code = codes[self.file_name]
 
 		self.pdf = os.path.isfile("../files/publications/pdf/" + self.file_name + ".pdf")
 
@@ -229,6 +242,8 @@ for year, year_entries in years.items():
 			resources.append("<a target=\"_blank\" href=\"./files/publications/pdf/" + entry.file_name + ".pdf\">pdf</a>")
 		if entry.eprint is not None:
 			resources.append("<a target=\"_blank\" href=\"" + entry.eprint + "\">" + entry.eprintType + "</a>")
+		if entry.code is not None:
+			resources.append("<a target=\"_blank\" href=\"" + entry.code + "\">code</a>")
 		if entry.poster:
 			resources.append("<a target=\"_blank\" href=\"./files/publications/posters/" + entry.file_name + ".pdf\">poster</a>")
 		if entry.link is not None:
