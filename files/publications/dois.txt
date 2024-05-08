@@ -3,3 +3,4 @@ AmbrosiEtAlACNSWorkshops2022 https://doi.org/10.1007/978-3-031-16815-4_17
 BoixelEtAlIJCAI2022 https://doi.org/10.24963/ijcai.2022/847
 NardiEtAlAAMAS2022 https://dl.acm.org/doi/10.5555/3535850.3535955
 IgarashiEtAlAAAI2024 https://doi.org/10.1609/aaai.v38i9.28837
+BernreiterEtAlAAMAS2024 https://dl.acm.org/doi/10.5555/3635637.3662864
