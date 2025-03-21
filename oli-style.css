@@ -27,10 +27,6 @@ a:hover {
     border-bottom: 0;
 }
 
-#picture-button:hover {
-    cursor: pointer;
-}
-
 .hidden-link {
   color: inherit;
   text-decoration: inherit;
@@ -83,12 +79,8 @@ footer {font-size: 75%}
     width: 40vw;
     height: auto;
     margin-top: 10px;
-    display: none;
+    display: inline;
     /* border: 1px solid var(--first); */
-}
-
-#picture-credits-text {
-    display: none;
 }
 
 hr {
