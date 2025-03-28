@@ -1,31 +1,8 @@
 let nav = "nav-"; // prefix of button elements
 let top_button = "about"; // top of the page
 let sections = ["contacts", "academic", "teaching", "publications"]; // other sections
-let justclicked = false;
 
 const sizeQuery = window.matchMedia("(max-width: 860px)"); 
-
-// button clicks!
-
-document.getElementById(nav+top_button).onclick = function() {
-  justclicked = true;
-  document.getElementById(nav+top_button).style.fontWeight = 'bold';
-  for (let i = 0; i < sections.length; i++) {
-    document.getElementById(nav+sections[i]).style.fontWeight = "normal";
-  }
-}
-
-for (let i = 0; i < sections.length; i++) {
-  document.getElementById(nav+sections[i]).onclick = function(){
-    justclicked = true;
-    document.getElementById(nav+top_button).style.fontWeight = 'normal';
-    for (let j = 0; j < sections.length; j++) {
-      document.getElementById(nav+sections[j]).style.fontWeight = i === j ? "bold" : "normal";
-    }
-  }
-}
-
-//
 
 function handleResize() {
   if (sizeQuery.matches) { // if we are in "phone mode", set everything to normal
@@ -42,11 +19,6 @@ window.onresize = handleResize;
 function handleScroll() { 
 
   if (sizeQuery.matches) { // if we are in "phone mode", abort
-    return;
-  } 
-
-  if (justclicked) { // if we are in "phone mode", abort
-    justclicked = false;
     return;
   } 
 
