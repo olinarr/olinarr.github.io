@@ -61,6 +61,8 @@ p {
         font-size: 120%;
     }
     #nav li {list-style-type: "> ";}
+
+    #nav-about {font-weight: bold;}
 }
 
 @media screen and (max-width: 860px) {
