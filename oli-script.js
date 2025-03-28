@@ -1,22 +1,32 @@
-document.onscroll = function() { 
+let nav = "nav-"; // prefix of button elements
+let top_button = "about"; // top of the page
+let sections = ["contacts", "academic", "teaching", "publications"]; // other sections
 
-  const mediaQuery = window.matchMedia("(max-width: 860px)"); 
+const sizeQuery = window.matchMedia("(max-width: 860px)"); 
 
-  let nav = "nav-"; // prefix of button elements
-  let top = "about"; // top of the page
-  let sections = ["contacts", "academic", "teaching", "publications"]; // other sections
-
-  if (mediaQuery.matches) { // if we are in "phone mode", set everything to normal and abort
-    document.getElementById(nav+top).style.fontWeight = 'normal';
+function handleResize() {
+  console.log("HELLO!");
+  if (sizeQuery.matches) { // if we are in "phone mode", set everything to normal
+    document.getElementById(nav+top_button).style.fontWeight = 'normal';
     for (let i = 0; i < sections.length; i++) {
       document.getElementById(nav+sections[i]).style.fontWeight = 'normal'; // rest to normal
     }
+  }
+  else { handleScroll(); } // otherwise, pretend we just scrolled
+} 
+
+window.onresize = handleResize;
+window.onvisibilitychange = handleResize;
+
+function handleScroll() { 
+
+  if (sizeQuery.matches) { // if we are in "phone mode", abort
     return;
   } 
 
-  // otherwise
+  //otherwise
   if (getVerticalScrollPercentage(document.body) === 0) { // if we are on top
-    document.getElementById(nav+top).style.fontWeight = 'bold'; // set about to bold
+    document.getElementById(nav+top_button).style.fontWeight = 'bold'; // set about to bold
     for (let i = 0; i < sections.length; i++) {
       document.getElementById(nav+sections[i]).style.fontWeight = 'normal'; // rest to normal
     }
@@ -27,7 +37,7 @@ document.onscroll = function() {
     // stop
     for (let i = 0; i < sections.length; i++) {
       if (isElementInViewport(document.getElementById(sections[i]))) {
-        document.getElementById(nav+top).style.fontWeight = 'normal';
+        document.getElementById(nav+top_button).style.fontWeight = 'normal';
         for (let j = 0; j < sections.length; j++) {
           document.getElementById(nav+sections[j]).style.fontWeight = i === j ? "bold" : "normal";
         }
@@ -36,6 +46,8 @@ document.onscroll = function() {
     }
   }
 }
+
+document.onscroll = handleScroll;
 
 function isElementInViewport (el) { //is element visible?
 
