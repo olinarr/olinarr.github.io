@@ -2,14 +2,19 @@ document.onscroll = function() {
 
   const mediaQuery = window.matchMedia("(max-width: 860px)"); 
 
-  if (mediaQuery.matches) { // if we are in "phone mode", abort
-    return;
-  }
-
   let nav = "nav-"; // prefix of button elements
   let top = "about"; // top of the page
   let sections = ["contacts", "academic", "teaching", "publications"]; // other sections
 
+  if (mediaQuery.matches) { // if we are in "phone mode", set everything to normal and abort
+    document.getElementById(nav+top).style.fontWeight = 'normal';
+    for (let i = 0; i < sections.length; i++) {
+      document.getElementById(nav+sections[i]).style.fontWeight = 'normal'; // rest to normal
+    }
+    return;
+  } 
+
+  // otherwise
   if (getVerticalScrollPercentage(document.body) === 0) { // if we are on top
     document.getElementById(nav+top).style.fontWeight = 'bold'; // set about to bold
     for (let i = 0; i < sections.length; i++) {
