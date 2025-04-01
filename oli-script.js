@@ -2,25 +2,43 @@ let nav = "nav-"; // prefix of button elements
 let top_button = "about"; // top of the page
 let sections = ["contacts", "academic", "teaching", "publications"]; // other sections
 
+let navButtons = [nav + top_button, ...sections.map(section => nav + section)];
+
+let lastClicked = Date.now(); // record the time when the flag is set
+const TIME_THRESHOLD = 100; // 100 milliseconds
+
 const sizeQuery = window.matchMedia("(max-width: 860px)"); 
+
+function setAllToNormal() {
+  for (let i = 0; i < navButtons.length; i++) {
+    document.getElementById(navButtons[i]).style.fontWeight =  "normal";
+  }
+}
+
+for (let i = 0; i < navButtons.length; i++) {
+  document.getElementById(navButtons[i]).onclick = function(){
+    setAllToNormal();
+    document.getElementById(navButtons[i]).style.fontWeight = 'bold';
+    lastClicked = Date.now();
+  };
+}
 
 function handleResize() {
   if (sizeQuery.matches) { // if we are in "phone mode", set everything to normal
-    document.getElementById(nav+top_button).style.fontWeight = 'normal';
-    for (let i = 0; i < sections.length; i++) {
-      document.getElementById(nav+sections[i]).style.fontWeight = 'normal';
-    }
+    setAllToNormal();
   }
-  else { handleScroll(); } // otherwise, pretend we just scrolled
+  else { // else, pretend we just scrolled
+    handleScroll();
+  } 
 } 
 
 window.onresize = handleResize;
 
 function handleScroll() { 
 
-  if (sizeQuery.matches) { // if we are in "phone mode", abort
+  if (Date.now() - lastClicked <= TIME_THRESHOLD || sizeQuery.matches) { // if we just clicked on a button or are in the phone... Do nothing
     return;
-  } 
+  }
 
   //otherwise
   if (getVerticalScrollPercentage(document.body) === 0) { // if we are on top
