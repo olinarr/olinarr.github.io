@@ -60,7 +60,10 @@ p {
         margin-top:10px;
         font-size: 120%;
     }
-    #nav li {list-style-type: "> ";}
+    #nav ul { list-style: none; margin-left: -15px}
+    #nav ul li:before { content: "> "; }
+
+    #nav-cv-bullet::before {visibility: hidden;}
 
     #nav-about {font-weight: bold;}
 }

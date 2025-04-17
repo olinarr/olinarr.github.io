@@ -86,3 +86,5 @@ function getVerticalScrollPercentage(elm) { // scroll percentage of element
   var p = elm.parentNode;
   return (elm.scrollTop || p.scrollTop) / (p.scrollHeight - p.clientHeight) * 100;
 }
+
+handleScroll(); // one run
