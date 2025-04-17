@@ -5,7 +5,7 @@ let sections = ["contacts", "academic", "teaching", "publications"]; // other se
 let navButtons = [nav + top_button, ...sections.map(section => nav + section)];
 
 let lastClicked = Date.now(); // record the time when the flag is set
-const TIME_THRESHOLD = 100; // 100 milliseconds
+const TIME_THRESHOLD = 100; // milliseconds
 
 const sizeQuery = window.matchMedia("(max-width: 860px)"); 
 
@@ -15,10 +15,14 @@ function setAllToNormal() {
   }
 }
 
+function onlyThisBold(nav_button) {
+  setAllToNormal();
+  document.getElementById(nav_button).style.fontWeight = 'bold';
+}
+
 for (let i = 0; i < navButtons.length; i++) {
   document.getElementById(navButtons[i]).onclick = function(){
-    setAllToNormal();
-    document.getElementById(navButtons[i]).style.fontWeight = 'bold';
+    onlyThisBold(navButtons[i]);
     lastClicked = Date.now();
   };
 }
@@ -26,7 +30,6 @@ for (let i = 0; i < navButtons.length; i++) {
 function handleResize() {
   if (sizeQuery.matches) { // if we are in "phone mode", set everything to normal
     setAllToNormal();
-    console.log(counter); counter += 1;
   }
   else { // else, pretend we just scrolled
     handleScroll();
@@ -52,10 +55,7 @@ function handleScroll() {
 
   //otherwise
   if (getVerticalScrollPercentage(document.body) === 0) { // if we are on top
-    document.getElementById(nav+top_button).style.fontWeight = 'bold'; // set about to bold
-    for (let i = 0; i < sections.length; i++) {
-      document.getElementById(nav+sections[i]).style.fontWeight = 'normal'; // rest to normal
-    }
+    onlyThisBold(nav+top_button);
   } else { // else, scroll sections from bottom to top; the last section that is 
     // on view (thus, the first we encouter):
     // we set that to bold
@@ -97,4 +97,14 @@ function getVerticalScrollPercentage(elm) { // scroll percentage of element
   return (elm.scrollTop || p.scrollTop) / (p.scrollHeight - p.clientHeight) * 100;
 }
 
-handleScroll(); // one run
+// When the page is loaded and seen,
+document.addEventListener("DOMContentLoaded", () => {
+  requestAnimationFrame(() => {
+    // if we are not on the phone, set bold initially to the section we are at
+    if (!sizeQuery.matches) {
+      const hashFragment = window.location.hash.substring(1); // Removes the "#"
+      // If hash is empty, do something with "about"
+      onlyThisBold(nav+(hashFragment === "" ? top_button : hashFragment));
+    }
+  });
+});

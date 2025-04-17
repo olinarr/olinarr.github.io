@@ -64,8 +64,6 @@ p {
     #nav ul li:before { content: "> "; }
 
     #nav-cv-bullet::before {visibility: hidden;}
-
-    #nav-about {font-weight: bold;}
 }
 
 @media screen and (max-width: 860px) {
