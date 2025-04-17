@@ -26,13 +26,18 @@ for (let i = 0; i < navButtons.length; i++) {
 function handleResize() {
   if (sizeQuery.matches) { // if we are in "phone mode", set everything to normal
     setAllToNormal();
+    console.log(counter); counter += 1;
   }
   else { // else, pretend we just scrolled
     handleScroll();
   } 
 } 
 
-window.onresize = handleResize;
+window.addEventListener('resize', () => {
+  setTimeout(() => {
+    handleResize();
+  }, TIME_THRESHOLD);
+});
 
 function handleScroll() { 
 
