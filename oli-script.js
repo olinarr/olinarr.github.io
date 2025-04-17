@@ -36,7 +36,12 @@ window.onresize = handleResize;
 
 function handleScroll() { 
 
-  if (Date.now() - lastClicked <= TIME_THRESHOLD || sizeQuery.matches) { // if we just clicked on a button or are in the phone... Do nothing
+  if (Date.now() - lastClicked <= TIME_THRESHOLD) { // if we just clicked on a button, do nothing
+    return;
+  }
+
+  if (sizeQuery.matches) { // if we are on the phone, set all to normal and abort
+    setAllToNormal();
     return;
   }
 
