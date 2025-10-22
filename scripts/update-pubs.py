@@ -96,6 +96,9 @@ class Entry:
 		self.doi = None
 		self.link = None
 		self.code = None
+		self.journal_name = None
+		self.journal_infostring = None
+		self.pages = None
 		self.isPreprint = isPreprint
 
 		self.bib = entry
@@ -116,8 +119,21 @@ class Entry:
 		else:
 			self.authors = authors_good[0]
 
-		self.month = re.match(r".*month[^\{]*\{([^\}]*)\}", entry).group(1)
-		self.year = re.match(r".*year[^\{]*\{([^\}]*)\}", entry).group(1)
+		note = re.match(r".*note[^\{]*\{([^\}]*)\}", entry)
+		if note is not None:
+			self.note = note.group(1)
+
+		month = re.match(r".*month[^\{]*\{([^\}]*)\}", entry)
+		year = re.match(r".*year[^\{]*\{([^\}]*)\}", entry)
+
+		if year is None:
+			# If year is missing, so must be the month. And if both are, entry must be forthcoming
+			assert month is None and self.note == "Forthcoming"  
+			self.year = "forthcoming"
+		else:
+			self.year = year.group(1)
+			if month is not None:
+				self.month = month.group(1)
 
 		booktitle = re.match(r".*booktitle[^\{]*\{([^\}]*)\}", entry)
 		if booktitle is not None:
@@ -131,9 +147,23 @@ class Entry:
 		if publisher is not None:
 			self.publisher = publisher.group(1)
 
-		note = re.match(r".*note[^\{]*\{([^\}]*)\}", entry)
-		if note is not None:
-			self.note = note.group(1)
+		journal_name = re.match(r".*journal[^\{]*\{([^\}]*)\}", entry)
+		if journal_name is not None:
+			self.journal_name = journal_name.group(1)
+
+		volume = re.match(r".*volume[^\{]*\{([^\}]*)\}", entry)
+		if volume is not None:
+			self.journal_infostring = volume.group(1)
+
+		number = re.match(r".*number[^\{]*\{([^\}]*)\}", entry)
+		if number is not None:
+			self.journal_infostring += f"({number.group(1)})"
+
+		pages = re.match(r".*pages[^\{]*\{([^\}]*)\}", entry)
+		if pages is not None:
+			self.pages = pages.group(1).replace("--", "–")
+			if self.journal_infostring is not None:
+				self.journal_infostring += f":{self.pages}"
 
 		school = re.match(r".*school[^\{]*\{([^\}]*)\}", entry)
 		if school is not None:
@@ -195,7 +225,7 @@ for key in ("pubs", "preprints"):
 	for entry in entries[key]:
 		with open("../files/publications/bib/" + entry.file_name + ".bib" , "w") as file:
 			file.write(entry.bib)
-	
+
 years = {"preprints": set()}
 
 for entry in entries["preprints"]:
@@ -207,17 +237,20 @@ for entry in entries["pubs"]:
 	else:
 		years[entry.year] = {entry}
 
+sorted_years = ["preprints", "forthcoming"] + sorted(year for year in years.keys() if year.isdigit())[::-1]
 
 result = "<!-- Automatically generated from my personal .bib file -->\n<h2 id=\"publications\">Publications</h2>\n\n(You may also check my <a href=\"https://dblp.uni-trier.de/pid/319/9565.html\">dblp page</a>.)\n\n"
 
-for year, year_entries in years.items():
+for year in sorted_years:
+	year_entries = years[year]
+
 	if not year_entries:
 		continue
 	
 	result += f"<h3>{year}</h3>\n\t<ul>\n"
 	for entry in sorted(year_entries):
 
-		assert entry.the_type in ("inproceedings", "mastersthesis", "misc")
+		assert entry.the_type in ("inproceedings", "mastersthesis", "misc", "article")
 
 		result += "\t\t<li> "
 
@@ -225,17 +258,25 @@ for year, year_entries in years.items():
 
 		if entry.the_type == "inproceedings":
 			result += "In <em>" + entry.booktitle + "</em> " + entry.conference
+			if entry.pages is not None:
+				result += ", pages " + entry.pages
 			if entry.publisher is not None:
 				result += ", " + entry.publisher
+
 			result += ", " + f"{entry.month} {entry.year}. "
 		elif entry.the_type == "mastersthesis":
 			result += "Master's Thesis, " + entry.school + ", " + f"{entry.month} {entry.year}. "
 		elif entry.the_type == "misc":
 			if not entry.isPreprint:
 				result += f"{entry.month} {entry.year}. "
+		elif entry.the_type == "article":
+			result += f"<em>{entry.journal_name}</em>"
+			if entry.year != "forthcoming":
+				result += ", " + entry.journal_infostring
+			result += ". "
 
 		if entry.note:
-			result += f"{entry.note}."
+			result += f"{entry.note}. "
 
 		resources = []
 		if entry.pdf:
@@ -253,7 +294,7 @@ for year, year_entries in years.items():
 
 		resources.append("<a target=\"_blank\" href=\"./files/publications/bib/" + entry.file_name + ".bib\">bib</a>")
 
-		result += ("&nbsp;&nbsp;[" + ", ".join(resources) + "]") if resources else ""
+		result += ("&nbsp;[" + ", ".join(resources) + "]") if resources else ""
 
 		result += "\n"
 

@@ -1,5 +1,6 @@
 1) To add a new publication, add it inside cv-source/preprints.bib, cv-source/conference.bib or cv-source/journal.bib
-    - If it still to appear, insert "To appear." in the notes. (Remember to remove it after!).
+    - If it still to appear, insert "Forthcoming" in the notes. (Remember to remove it after!).
+    - For "@article" papers, if it is "Forthcoming", you can skip the year information. 
     - If it is a preprint, then ONLY add it inside files/publications/preprints.bib
         * When the preprint is published, you should remove it from this file there, as well as from the eprints.txt, dois.txt and links.txt files.
     - Only a certain set of bib-items are supported (misc, inproceedings...). If you need a new one, update the update-citations.py file.
@@ -12,3 +13,13 @@
 6) To add a link (e.g. to a demo), insert inside the file files/publications/links.txt a line like "NAME <link>".
 6) To add a code (e.g. Zenodo, Github), insert inside the file files/publications/codes.txt a line like "NAME <code>".
 7) Run "bash make.bash" inside the scripts folder.
+
+# Warnings:
+    - except for "@article", currently all items need month and year.
+    - for "@article", you can avoid putting the year (and other) information, if it is "Forthcoming"
+    - Be sure to format the commas in the bib-files correctly. An extra "," at the end, or no comma after "@blah{title," will break things.
+    # For pages, you should use ABC--XYZ (so double -).
+
+# about joruansl, forthcoming
+# warning about ,
+# pages: use --
