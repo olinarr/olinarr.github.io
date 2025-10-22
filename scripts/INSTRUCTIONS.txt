@@ -19,7 +19,3 @@
     - for "@article", you can avoid putting the year (and other) information, if it is "Forthcoming"
     - Be sure to format the commas in the bib-files correctly. An extra "," at the end, or no comma after "@blah{title," will break things.
     # For pages, you should use ABC--XYZ (so double -).
-
-# about joruansl, forthcoming
-# warning about ,
-# pages: use --

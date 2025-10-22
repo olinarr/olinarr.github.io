@@ -250,7 +250,7 @@ for year in sorted_years:
 	result += f"<h3>{year}</h3>\n\t<ul>\n"
 	for entry in sorted(year_entries):
 
-		assert entry.the_type in ("inproceedings", "mastersthesis", "misc", "article")
+		assert entry.the_type in ("inproceedings", "thesis", "misc", "article")
 
 		result += "\t\t<li> "
 
@@ -264,8 +264,8 @@ for year in sorted_years:
 				result += ", " + entry.publisher
 
 			result += ", " + f"{entry.month} {entry.year}. "
-		elif entry.the_type == "mastersthesis":
-			result += "Master's Thesis, " + entry.school + ", " + f"{entry.month} {entry.year}. "
+		elif entry.the_type == "thesis":
+			result += entry.school + ", " + f"{entry.month} {entry.year}. "
 		elif entry.the_type == "misc":
 			if not entry.isPreprint:
 				result += f"{entry.month} {entry.year}. "
