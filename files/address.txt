@@ -1,6 +1,6 @@
-****************************************
-*          Oliviero's Office           *
-****************************************
+*************************
+**  Oliviero's Office  **
+*************************
 
 Institute of Logic and Computation
 Database and Artificial Intelligence Group 192/2
