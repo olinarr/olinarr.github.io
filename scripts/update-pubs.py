@@ -62,6 +62,7 @@ with open("../files/publications/links.txt", "r") as file:
 	data = file.read()
 	if data:
 		for row in data.split("\n"):
+			if row == "": continue
 			name, link = row.split(" ")
 			assert name not in links
 			links[name] = link

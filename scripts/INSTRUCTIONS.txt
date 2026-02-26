@@ -1,3 +1,8 @@
+OPEN TODOs:
+	the AAMAS2026 demo paper needs the page numbers!
+	should I add months to journal versions?
+
+
 1) To add a new publication, add it inside cv-source/preprints.bib, cv-source/conference.bib or cv-source/journal.bib
     - If it still to appear, insert "Forthcoming" in the notes. (Remember to remove it after!).
     - For "@article" papers, if it is "Forthcoming", you can skip the year information. 
@@ -18,4 +23,4 @@
     - except for "@article", currently all items need month and year.
     - for "@article", you can avoid putting the year (and other) information, if it is "Forthcoming"
     - Be sure to format the commas in the bib-files correctly. An extra "," at the end, or no comma after "@blah{title," will break things.
-    # For pages, you should use ABC--XYZ (so double -).
+    - For pages, you should use ABC--XYZ (so double -).
