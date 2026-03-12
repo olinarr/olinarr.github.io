@@ -1,5 +1,5 @@
 OPEN TODOs:
-	the AAMAS2026 demo paper needs the page numbers!
+	the AAMAS2026 demo paper needs the page numbers, updated (final) pdf, and check the DOI!
 	should I add months to journal versions?
 
 
