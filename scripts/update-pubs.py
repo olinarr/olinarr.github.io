@@ -56,6 +56,8 @@ with open("../files/publications/eprints.txt", "r") as file:
     data = file.read()
     if data:
         for row in data.split("\n"):
+            if row == "":
+                continue
             name, link, eprintType = row.split(" ")
             if link == "local":
                 link = "./files/publications/full-versions/" + name + ".pdf"
@@ -120,6 +122,10 @@ class Entry:
         self.isPreprint = isPreprint
 
         self.bib = entry
+
+        # clean up of bibtex escape chars 
+        entry = entry.replace("{\\'e}", "é")
+        entry = entry.replace("{\\l}", "ł")
 
         entry = entry.replace("\n", " ")
         self.the_type = re.match(r"@([^\{]*)\{", entry).group(1)
