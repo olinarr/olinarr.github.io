@@ -5,6 +5,9 @@ data = {}
 with open("../cv-source/conference.bib", "r") as file:
     data["pubs"] = file.read()
 
+with open("../cv-source/workshop.bib", "r") as file:
+    data["pubs"] += file.read()
+
 with open("../cv-source/journal.bib", "r") as file:
     data["pubs"] += file.read()
 

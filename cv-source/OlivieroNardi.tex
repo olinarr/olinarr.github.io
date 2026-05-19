@@ -11,6 +11,7 @@
 \usepackage[resetlabels,labeled]{multibib}
 
 \newcites{Conf}{Conference publications}
+\newcites{Works}{Workshop publications}
 \newcites{Jour}{Journal publications}
 \newcites{Thes}{Theses}
 \newcites{Prep}{Preprints}
@@ -196,6 +197,10 @@
     \nociteConf{*}
     \bibliographystyleConf{unsrt}
     \bibliographyConf{conference}
+
+    \nociteWorks{*}
+    \bibliographystyleWorks{unsrt}
+    \bibliographyWorks{workshop}
 
     \nociteThes{*}
     \bibliographystyleThes{unsrt}

@@ -1,9 +1,12 @@
 OPEN TODOs:
 	the AAMAS2026 demo paper needs the page numbers, updated (final) pdf, and check the DOI!
+	the EC2026 paper needs the page numbers, updated (final) pdf, and check the DOI!
 	should I add months to journal versions?
+	the proceedings have the wrong name? check conference by conference
+	website should divide per confs, journal, etc?
 
 
-1) To add a new publication, add it inside cv-source/preprints.bib, cv-source/conference.bib or cv-source/journal.bib
+1) To add a new publication, add it inside cv-source/preprints.bib, cv-source/conference.bib or cv-source/journal.bib, etc...
     - If it still to appear, insert "Forthcoming" in the notes. (Remember to remove it after!).
     - For "@article" papers, if it is "Forthcoming", you can skip the year information. 
     - If it is a preprint, then ONLY add it inside files/publications/preprints.bib

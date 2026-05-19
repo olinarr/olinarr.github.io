@@ -76,6 +76,7 @@ rm Conf.*
 rm Jour.*
 rm Thes.*
 rm Prep.*
+rm Works.*
 
 pdflatex OlivieroNardi.tex
 
@@ -90,6 +91,10 @@ fi
 
 if [ -s thesis.bib ]; then
     bibtex Thes.aux
+fi
+
+if [ -s workshop.bib ]; then
+    bibtex Works.aux
 fi
 
 if [ -s preprint.bib ]; then
