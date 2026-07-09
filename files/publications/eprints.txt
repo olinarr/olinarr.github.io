@@ -1,4 +1,5 @@
-IgarashiEtAlAAAI2024 https://arxiv.org/abs/2304.01644 arXiv
 LacknerEtAlAAMAS2023 https://arxiv.org/abs/2310.08194 arXiv
 BernreiterEtAlAAMAS2024 https://arxiv.org/abs/2402.05895 arXiv
+IgarashiEtAlAAAI2024 https://arxiv.org/abs/2304.01644 arXiv
 GrandiEtAlHal2026 https://hal.science/hal-05548117 hal
+BaychkovEtAlEC2026 https://arxiv.org/abs/2606.19968 arXiv
