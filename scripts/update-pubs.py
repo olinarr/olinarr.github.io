@@ -278,7 +278,10 @@ sorted_years = ["preprints", "forthcoming"] + sorted(
 result = '<!-- Automatically generated from my personal .bib file -->\n<h2 id="publications">Publications</h2>\n\n(You may also check my <a href="https://dblp.uni-trier.de/pid/319/9565.html">dblp page</a>.)\n\n'
 
 for year in sorted_years:
-    year_entries = years[year]
+    try:
+        year_entries = years[year]
+    except KeyError:
+        continue
 
     if not year_entries:
         continue
