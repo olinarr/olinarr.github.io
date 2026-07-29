@@ -1,4 +1,5 @@
 OPEN TODOs:
+	make sure all the papers are final, all refs are good, etc.
 	the AAMAS2026 demo paper needs the page numbers, updated (final) pdf, and check the DOI!
 	the EC2026 paper needs the page numbers, updated (final) pdf, and check the DOI!
 	should I add months to journal versions?
