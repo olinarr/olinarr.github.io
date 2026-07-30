@@ -87,6 +87,14 @@ footer {font-size: 75%}
     }
 }
 
+.email-list {
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    vertical-align: top;
+}
+
 #oliviero-picture {
     float:right;
     margin-left: 5%;
