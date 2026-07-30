@@ -26,7 +26,18 @@
 %\mobile{+31~(0)20~525~2858}
 %\phone{+31~(0)20~525~2858}
 %\fax{fax}: optional
-\email{oliviero.nardi@tuwien.ac.at}
+% I modified this to have multiple mails. Source: https://tex.stackexchange.com/a/681388
+% If I want just one email, I should do \email{email@doma.in}
+\let\myemaillink\emaillink
+\let\myemailsymbol\emailsymbol
+\renewcommand{\emaillink}[1]{#1}
+\renewcommand{\emailsymbol}{}
+\email{
+  \myemailsymbol \myemaillink{oliviero.nardi@tuwien.ac.at}
+  \\
+  \myemailsymbol \myemaillink{oliviero.nardi@wu.ac.at}
+  \\
+}
 \homepage{olinarr.github.io}
 % \extrainfo{} optional; here you can put, for example, the address of your website
 %\photo[64pt]{picture}: optional; 64pt is the height the picture, you can set here the size you prefer; picture is the name of the picture file
