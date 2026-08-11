@@ -1,5 +1,6 @@
 OPEN TODOs:
-	make sure all the papers are final, all refs are good, etc. (and that the LLM paper's conference is posted)
+	make sure all the papers are final, all refs are good, etc.
+	the ACM AI summit LLM paper needs proper bibtex, pdf, etc.
 	the EC2026 paper needs the page numbers, updated (final) pdf, and check the DOI!
 	should I add months to journal versions?
 	the proceedings have the wrong name? check conference by conference
