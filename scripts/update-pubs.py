@@ -295,7 +295,7 @@ for year in sorted_years:
         result += entry.authors + ". <strong>" + entry.title + "</strong>. "
 
         if entry.the_type == "inproceedings":
-            result += "In <em>" + entry.booktitle + "</em> " + entry.conference
+            result += "In <em>" + entry.booktitle + "</em>" + ("" if  entry.conference is None else " " + entry.conference)
             if entry.pages is not None:
                 result += ", pages " + entry.pages
             if entry.publisher is not None:
