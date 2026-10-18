@@ -234,6 +234,10 @@ class Entry:
             "../files/publications/posters/" + self.file_name + ".pdf"
         )
 
+        self.slides = os.path.isfile(
+            "../files/publications/slides/" + self.file_name + ".pdf"
+        )
+
     def __gt__(self, other):
         if self.year > other.year:
             return True
@@ -338,6 +342,12 @@ for year in sorted_years:
                 '<a target="_blank" href="./files/publications/posters/'
                 + entry.file_name
                 + '.pdf">poster</a>'
+            )
+        if entry.slides:
+            resources.append(
+                '<a target="_blank" href="./files/publications/slides/'
+                + entry.file_name
+                + '.pdf">slides</a>'
             )
         if entry.link is not None:
             resources.append('<a target="_blank" href="' + entry.link + '">link</a>')
